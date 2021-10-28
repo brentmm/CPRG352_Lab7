@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="style.css" rel="stylesheet" type="text/css">
-        <title>JSP Page</title>
+        <title>Manage User</title>
     </head>
     <body>
         <div id="background">
@@ -45,7 +45,7 @@
                     <th style="padding-left: 0%; color: lightcyan">Email</th>
                     <th style="padding-left: 3%; color: lightcyan">First </th>
                     <th style="padding-left: 2%; color: lightcyan">Last </th>  
-                    <th style="padding-left: 0%; color: lightcyan">Edit and Delete</th> 
+                    <th style="padding-left: 0%; color: lightcyan">Edit Delete</th> 
                     </tr>
                     
                 <c:forEach items="${users}" var="user">
@@ -53,19 +53,16 @@
                         <td class="manage" style="padding:0 0 3% 2% ">
                             ${user.getEmail()}
                         </td>
-                        <td class="manage" style="padding: 0% 0% 4% 3%">
+                        <td class="manage" style="padding: 0% 0% 3% 3%">
                             ${user.getFirstname()}
                         </td>
-                        <td class="manage" style="padding: 0% 0% 4% 5%">
+                        <td class="manage" style="padding: 0% 0% 3% 5%">
                              ${user.getLastname()}
                         </td>
-                        <td class="manage" style="padding: 0% 0% 4% 5%">
-                             
-                        </td>
-                        
+                        <td class="manage" style="padding: 0% 0% 3% 6%">
+                            <a href="edit?${user.getEmail()}" style="text-decoration: none; padding-right: 10%; padding-left: 10%"><image src="Edit_icon.png" width="20px"> </a> 
+                            <a href="delete?${user.getEmail()}"><image src="delete icon.png" width="20px"> </a> 
                     </tr>
-                    
-                    <p class="input"> </p> 
                 </c:forEach>
                     </table>
             </div>

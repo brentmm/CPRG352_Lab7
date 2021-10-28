@@ -53,4 +53,3 @@ public class RoleDB {
 
 
 //in user you get the instance of role, in role, you check what it is and conver it
-
