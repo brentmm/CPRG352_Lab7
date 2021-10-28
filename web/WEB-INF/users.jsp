@@ -43,23 +43,23 @@
                 <table class="manage" style="border: solid white 2px; background-color: rgb(50,50,50);">
                     <tr style="">
                     <th style="padding-left: 0%; color: lightcyan">Email</th>
-                    <th style="padding-right: 0%; color: lightcyan">First name</th>
-                    <th style="padding-left: 0%; color: lightcyan">Last name</th>  
+                    <th style="padding-left: 3%; color: lightcyan">First </th>
+                    <th style="padding-left: 2%; color: lightcyan">Last </th>  
                     <th style="padding-left: 0%; color: lightcyan">Edit and Delete</th> 
                     </tr>
                     
                 <c:forEach items="${users}" var="user">
                     <tr style="color: white" >
-                        <td class="manage" style="padding: 1% 1% 1% 1%">
+                        <td class="manage" style="padding:0 0 3% 2% ">
                             ${user.getEmail()}
                         </td>
-                        <td class="manage" style="padding: 2% 2% 2% 2%">
+                        <td class="manage" style="padding: 0% 0% 4% 3%">
                             ${user.getFirstname()}
                         </td>
-                        <td class="manage" style="">
+                        <td class="manage" style="padding: 0% 0% 3% 4%">
                              ${user.getLastname()}
                         </td>
-                        <td class="manage" style="">
+                        <td class="manage" style="padding: 0% 0% 3% 4%">
                              ${user.getLastname()}
                         </td>
                         

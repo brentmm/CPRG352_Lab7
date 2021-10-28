@@ -24,7 +24,6 @@ public class UserServlet extends HttpServlet {
         
         UserDB udb = new UserDB();
         try {
-            
             List<User> usersList = udb.getAll(); 
             request.setAttribute("users", usersList);
         } catch (Exception ex) {
