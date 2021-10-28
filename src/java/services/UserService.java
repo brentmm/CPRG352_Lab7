@@ -1,9 +1,7 @@
 package services;
+import models.Role;
+import models.User;
 
-/**
- *
- * @author Dynamic Duo
- */
 public class UserService {
     
 }

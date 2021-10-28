@@ -2,12 +2,6 @@ package dataaccess;
 
 import java.sql.*;
 
-
-/*
-    Adapted from lab7 demo
-    Credit to owner
-
-*/
 public class DBUtil {
     public static void closePreparedStatement(Statement ps) {
         try {
