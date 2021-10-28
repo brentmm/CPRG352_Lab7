@@ -11,7 +11,7 @@ import models.User;
 
 public class UserDB {
 
-    public List<User> getAll(String email) throws Exception {
+    public List<User> getAll() throws Exception {
         List<User> users = new ArrayList<>();
         Role role = new Role();
         ConnectionPool cp = ConnectionPool.getInstance();
@@ -19,13 +19,13 @@ public class UserDB {
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        String sql = "SELECT * FROM userdb WHERE email=?";
+        String sql = "SELECT * FROM user";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, email);
             rs = ps.executeQuery();
             while (rs.next()) {
+                String email = rs.getString(1);
                 Boolean active = rs.getBoolean(2);
                 String firstName = rs.getString(3);
                 String lastName = rs.getString(4);
@@ -52,7 +52,7 @@ public class UserDB {
         
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM userdb WHERE email=?";
+        String sql = "SELECT * FROM user WHERE email=?";
         
         try {
             ps = con.prepareStatement(sql);
@@ -80,7 +80,7 @@ public class UserDB {
         Role role = new Role();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "INSERT INTO userdb (email, active, first_name, last_name, password, role) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO user (email, active, first_name, last_name, password, role) VALUES (?, ?, ?, ?, ?, ?)";
         
         try {
             ps = con.prepareStatement(sql);
@@ -114,7 +114,7 @@ public class UserDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "UPDATE userdb SET active=? , first_name=?, last_name=?, password=?, role=? WHERE email=?";
+        String sql = "UPDATE user SET active=? , first_name=?, last_name=?, password=?, role=? WHERE email=?";
         
         try {
             ps = con.prepareStatement(sql);
@@ -135,7 +135,7 @@ public class UserDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "DELETE FROM userdb WHERE email=?";
+        String sql = "DELETE FROM user WHERE email=?";
         
         try {
             ps = con.prepareStatement(sql);

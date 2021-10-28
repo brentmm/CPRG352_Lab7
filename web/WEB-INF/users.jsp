@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,7 +39,14 @@
         <div class="column">
             <div class="card">
                 <h1 class="headers">Manage Users</h1>
-                <input class="input" type="email" placeholder="Email"><br>
+                
+                <c:forEach items="${users}" var="User">
+                    <p class="input">
+                    </p>
+                    
+                </c:forEach>
+                
+                <input class="input" type="text" placeholder="Email"><br>
                 <input  class="input"type="text" placeholder="First Name"><br>
                 <input class="input"type="text" placeholder="Last Name"><br>
                 <input class="input"type="password" placeholder="Password"><br>

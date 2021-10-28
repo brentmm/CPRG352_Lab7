@@ -17,7 +17,7 @@ public class RoleService {
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        String sql = "SELECT * FROM userdb WHERE role=?";
+        String sql = "SELECT * FROM user WHERE role=?";
         
         try {
             ps = con.prepareStatement(sql);
