@@ -41,8 +41,6 @@ and open the template in the editor.
 .card {
     font-size: 125%;
     margin-left: 5%;
-    margin-right: 5%;
-    
     padding: 1% 3% 3% 3%;
 
 }
@@ -85,11 +83,20 @@ and open the template in the editor.
     color: white;
 }
 #background{
-    color: black;
+
 }
 .headers{
     color:purple;
 }
 body{
 background-image:url('https://cdn.discordapp.com/attachments/893369250343944193/902992885295747102/photo-1626624338641-b99e0d32c958.png');
+}
+.manage{
+
+}
+td{
+    color: white;
+}
+th{
+    color: white;
 }

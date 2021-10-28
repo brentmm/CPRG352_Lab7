@@ -40,17 +40,34 @@
             <div class="card">
                 <h1 class="headers">Manage Users</h1>
                 
-                <c:forEach items="${users}" var="User">
-                    <p class="input">
-                    </p>
+                <table class="manage" style="border: solid white 2px; background-color: rgb(50,50,50);">
+                    <tr style="">
+                    <th style="padding-left: 0%; color: lightcyan">Email</th>
+                    <th style="padding-right: 0%; color: lightcyan">First name</th>
+                    <th style="padding-left: 0%; color: lightcyan">Last name</th>  
+                    <th style="padding-left: 0%; color: lightcyan">Edit and Delete</th> 
+                    </tr>
                     
+                <c:forEach items="${users}" var="user">
+                    <tr style="color: white" >
+                        <td class="manage" style="padding: 1% 1% 1% 1%">
+                            ${user.getEmail()}
+                        </td>
+                        <td class="manage" style="padding: 2% 2% 2% 2%">
+                            ${user.getFirstname()}
+                        </td>
+                        <td class="manage" style="">
+                             ${user.getLastname()}
+                        </td>
+                        <td class="manage" style="">
+                             ${user.getLastname()}
+                        </td>
+                        
+                    </tr>
+                    
+                    <p class="input"> </p> 
                 </c:forEach>
-                
-                <input class="input" type="text" placeholder="Email"><br>
-                <input  class="input"type="text" placeholder="First Name"><br>
-                <input class="input"type="text" placeholder="Last Name"><br>
-                <input class="input"type="password" placeholder="Password"><br>
-              <input class="input"type="text" placeholder="Role">
+                    </table>
             </div>
         </div>
         <div class="column">
