@@ -56,11 +56,11 @@
                         <td class="manage" style="padding: 0% 0% 4% 3%">
                             ${user.getFirstname()}
                         </td>
-                        <td class="manage" style="padding: 0% 0% 3% 4%">
+                        <td class="manage" style="padding: 0% 0% 4% 5%">
                              ${user.getLastname()}
                         </td>
-                        <td class="manage" style="padding: 0% 0% 3% 4%">
-                             ${user.getLastname()}
+                        <td class="manage" style="padding: 0% 0% 4% 5%">
+                             
                         </td>
                         
                     </tr>
