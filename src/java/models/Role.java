@@ -5,16 +5,16 @@ package models;
  * @author Dynamic Duo
  */
 public class Role {
-    private String role;
+    private int role;
 
     public Role() {
     }
 
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
     }
     

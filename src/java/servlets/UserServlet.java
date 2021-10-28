@@ -33,6 +33,28 @@ public class UserServlet extends HttpServlet {
         }
 
         String action = request.getParameter("action");
+        String emailIn = request.getParameter("email");
+        if(action != null){
+        if(action.equals("delete")){
+            String emailArray[]  = emailIn.split(" ");
+            String emailMake = emailArray[0] + "+" + emailArray[1];
+            try {
+                
+                udb.delete(emailMake);
+        try {
+            List<User> usersList = udb.getAll(); 
+            request.setAttribute("users", usersList);
+        } catch (Exception ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            
+        }
+        }
 
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);  //loads Shopping list page
         return;
@@ -45,18 +67,34 @@ public class UserServlet extends HttpServlet {
         
         UserDB udb = new UserDB();
         
-        String action = request.getParameter("action");
+        String action = request.getParameter("Add");
         String email = request.getParameter("email");
         String fName = request.getParameter("fName");
         String lName = request.getParameter("lName");
         String password = request.getParameter("password");
         String role = request.getParameter("roles");
         
+        switch (role){
+                case "System Admin":
+                Integer.parseInt(role) ;
+                
+                break;
+                case "Regular User":
+                ps.setInt(6, 2);
+                break;
+                case "Company Admin":
+                ps.setInt(6, 3);
+                break;    
+            }
+        
+        
+        
+        
         User user = new User (email, true, fName, lName, password, role);
         
         try {
             switch (action) {
-                case "add":
+                case "Add":
                     udb.insert(user);
                     udb.getAll();
                     break;

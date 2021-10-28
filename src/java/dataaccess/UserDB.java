@@ -30,7 +30,7 @@ public class UserDB {
                 String firstName = rs.getString(3);
                 String lastName = rs.getString(4);
                 String password = rs.getString(5);
-                role.setRole( rs.getString(6));
+                role.setRole(rs.getInt(6));
                 //int role = rs.getInt(6);
                 User user = new User(email, active, firstName, lastName, password, role.getRole());
                 users.add(user);
@@ -82,7 +82,7 @@ public class UserDB {
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         String sql = "INSERT INTO user (email, active, first_name, last_name, password, role) VALUES (?, ?, ?, ?, ?, ?)";
-        
+        //role.setRole(user.getRole());
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, user.getEmail());
@@ -91,7 +91,7 @@ public class UserDB {
             ps.setString(4, user.getLastname());
             ps.setString(5, user.getPassword());
             
-            switch (role.getRole()){
+            switch (user.getRole()){
                 case "System Admin":
                 ps.setInt(6, 1);
                 break;
@@ -132,7 +132,7 @@ public class UserDB {
         }
     }
 
-    public void delete(User user) throws Exception {
+    public void delete(String email) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
@@ -140,7 +140,7 @@ public class UserDB {
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, user.getEmail());
+            ps.setString(1, email);
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);

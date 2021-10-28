@@ -60,8 +60,8 @@
                                     ${user.getLastname()}
                                 </td>
                                 <td class="manage" style="padding: 0% 0% 3% 6%">
-                                    <a href="edit?${user.getEmail()}" style="text-decoration: none; padding-right: 10%; padding-left: 10%"><image src="Edit_icon.png" width="20px"> </a> 
-                                    <a href="delete?${user.getEmail()}"><image src="delete icon.png" width="20px"> </a> 
+                                    <a href="edit?action=edit&email=${user.getEmail()}" style="text-decoration: none; padding-right: 10%; padding-left: 10%"><image src="Edit_icon.png" width="20px"> </a> 
+                                    <a href="delete?action=delete&email=${user.getEmail()}"><image src="delete icon.png" width="20px"> </a> 
                             </tr>
                         </c:forEach>
                     </table>

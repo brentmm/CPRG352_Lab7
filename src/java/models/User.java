@@ -10,12 +10,12 @@ public class User {
     private String firstname;
     private String lastname;
     private String password;
-    private String role;
+    private int role;
 
     public User() {
     }
 
-    public User(String email, Boolean active, String firstname, String lastname, String password, String role) {
+    public User(String email, Boolean active, String firstname, String lastname, String password, int role) {
         this.email = email;
         this.active = active;
         this.firstname = firstname;
@@ -67,11 +67,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
     }
     
