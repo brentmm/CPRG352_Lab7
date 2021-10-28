@@ -36,6 +36,10 @@ public class UserServlet extends HttpServlet {
         String emailIn = request.getParameter("email");
         if(action != null){
         if(action.equals("delete")){
+            
+            
+            
+            if(emailIn.contains(" ")){
             String emailArray[]  = emailIn.split(" ");
             String emailMake = emailArray[0] + "+" + emailArray[1];
             try {
@@ -50,12 +54,20 @@ public class UserServlet extends HttpServlet {
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+            }
+        
         else{
-            
+            try {
+                udb.delete(emailIn);
+                List<User> usersList = udb.getAll(); 
+            request.setAttribute("users", usersList);
+                
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         }
-
+        }
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);  //loads Shopping list page
         return;
 
@@ -73,30 +85,26 @@ public class UserServlet extends HttpServlet {
         String lName = request.getParameter("lName");
         String password = request.getParameter("password");
         String role = request.getParameter("roles");
-        
+        int newRole = 0;
         switch (role){
-                case "System Admin":
-                Integer.parseInt(role) ;
-                
+                case "System Admin":             
+                newRole = 1;
                 break;
                 case "Regular User":
-                ps.setInt(6, 2);
+                newRole = 2;
                 break;
                 case "Company Admin":
-                ps.setInt(6, 3);
+                newRole = 3;
                 break;    
             }
-        
-        
-        
-        
-        User user = new User (email, true, fName, lName, password, role);
+         User user = new User (email, true, fName, lName, password, newRole);
         
         try {
             switch (action) {
                 case "Add":
                     udb.insert(user);
-                    udb.getAll();
+                    List<User> usersList = udb.getAll();
+                    request.setAttribute("users", usersList);
                     break;
 //                case "update":
 //                    ns.update(Integer.parseInt(noteId), title, contents, email);

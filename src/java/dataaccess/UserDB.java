@@ -90,18 +90,8 @@ public class UserDB {
             ps.setString(3, user.getFirstname());
             ps.setString(4, user.getLastname());
             ps.setString(5, user.getPassword());
+            ps.setInt(6,user.getRole());
             
-            switch (user.getRole()){
-                case "System Admin":
-                ps.setInt(6, 1);
-                break;
-                case "Regular User":
-                ps.setInt(6, 2);
-                break;
-                case "Company Admin":
-                ps.setInt(6, 3);
-                break;    
-            }
             
             
             ps.executeUpdate();
