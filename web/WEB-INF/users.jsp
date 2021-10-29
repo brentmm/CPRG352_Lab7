@@ -44,6 +44,7 @@
 
                     <table class="manage" style="border: solid white 2px; background-color: rgb(50,50,50); width: 100%">
                         <tr style="">
+                            <th style="margin-left: 4%; font-weight: bold">Role</th>
                             <th style="margin-left: 4%; font-weight: bold">Email</th>
                             <th style="margin-left: 4%; font-weight: bold">First name</th>
                             <th style="margin-left: 4%; font-weight: bold">Last name</th>  
@@ -53,6 +54,9 @@
                         <c:forEach items="${users}" var="user">
                             <c:if test="${user.getActive()}">
                                 <tr style="color: white" >
+                                    <td class="manage" style="">
+                                    ${user.getRole()}
+                                </td>
                                 <td class="manage" style="">
                                     ${user.getEmail()}
                                 </td>
@@ -75,6 +79,7 @@
                     </h1>
                     <table class="manage" style="border: solid white 2px; background-color: rgb(50,50,50); width: 100%">
                         <tr style="">
+                             <th style="margin-left: 4%; font-weight: bold">Role</th>
                             <th style="margin-left: 4%; font-weight: bold">Email</th>
                             <th style="margin-left: 4%; font-weight: bold">First name</th>
                             <th style="margin-left: 4%; font-weight: bold">Last name</th>  
@@ -84,6 +89,9 @@
                         <c:forEach items="${users}" var="user">
                             <c:if test="${!user.getActive()}">
                                  <tr style="color: white" >
+                                     <td class="manage" style="">
+                                    ${user.getRole()}
+                                </td>
                                 <td class="manage" style="">
                                     ${user.getEmail()}
                                 </td>

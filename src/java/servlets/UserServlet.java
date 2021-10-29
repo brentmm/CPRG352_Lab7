@@ -97,8 +97,6 @@ public class UserServlet extends HttpServlet {
             activation = true;
             }
         }
-        
-       
         int newRole = 0;
         switch (role){
                 case "System Admin":             
