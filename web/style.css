@@ -9,7 +9,10 @@ and open the template in the editor.
 */
 
 
-/* Float five columns side by side */
+.checkbox{
+    color: white;
+}
+
 
 .column {
     float: left;

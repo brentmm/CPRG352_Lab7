@@ -38,6 +38,16 @@ public class UserServlet extends HttpServlet {
         if(action.equals("delete")){
             
             
+            try {
+                udb.delete(emailIn);
+                List<User> usersList = udb.getAll(); 
+            request.setAttribute("users", usersList);
+                
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
             
             if(emailIn.contains(" ")){
             String emailArray[]  = emailIn.split(" ");
@@ -57,14 +67,7 @@ public class UserServlet extends HttpServlet {
             }
         
         else{
-            try {
-                udb.delete(emailIn);
-                List<User> usersList = udb.getAll(); 
-            request.setAttribute("users", usersList);
-                
-            } catch (Exception ex) {
-                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
         }
         }
         }
@@ -85,6 +88,17 @@ public class UserServlet extends HttpServlet {
         String lName = request.getParameter("lName");
         String password = request.getParameter("password");
         String role = request.getParameter("roles");
+        String activated = request.getParameter("active");
+        boolean activation = false;
+        if(activated != null){
+        if(request.getParameter("active")==null){
+             activation = false;
+        }else{
+            activation = true;
+            }
+        }
+        
+       
         int newRole = 0;
         switch (role){
                 case "System Admin":             
@@ -97,7 +111,7 @@ public class UserServlet extends HttpServlet {
                 newRole = 3;
                 break;    
             }
-         User user = new User (email, true, fName, lName, password, newRole);
+         User user = new User (email, activation, fName, lName, password, newRole);
         
         try {
             switch (action) {
