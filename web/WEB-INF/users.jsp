@@ -74,7 +74,7 @@
                             
                         </c:forEach>
                     </table>
-                    <h1 style="color: white">
+                    <h1 style="color: purple">
                         Inactive Users
                     </h1>
                     <table class="manage" style="border: solid white 2px; background-color: rgb(50,50,50); width: 100%">
@@ -114,14 +114,15 @@
                 <div class="card">
                     <form method="post" action="users">
                         <h1 class="headers">Edit Users</h1>
-                        <input class="input"type="email" placeholder="Email"><br>
-                        <input class="input"type="text" placeholder="First Name"><br>
-                        <input class="input"type="text" placeholder="Last Name"><br>
-                        <select class="dropdown"name="roles" id="roles">
+                        <input class="input"type="email" placeholder="Email" name="emailEdit" value="${emailEdit}"><br>
+                        <input class="input"type="text" placeholder="First Name" name="firstnameEdit" value="${firstnameEdit}"> <br>    
+                        <input class="input"type="text"placeholder="Last Name" value="${lastnameEdit}"><br>
+                        <select class='dropdown' name="roles" id="roles" value="${dropdownEdit}" name="dropdownEdit">
                             <option value="System Admin">System Admin</option>
                             <option value="Regular User">Regular User</option>
                             <option value="Company Admin">Company Admin</option>
                         </select><br>
+                         <a class="checkbox" style="color: white; background-color: rgb(50,50,50); width: 100%">Active<input style="" class="checkbox" type="checkbox" name="activeEdit" placeholder="" value=""></a> <br>
                         <input type="submit"name="save" value="Save" id="saveBtn"><br>
                         <input type="submit"name="cancel" value="Cancel" id="cancelBtn"><br>
                     </form>

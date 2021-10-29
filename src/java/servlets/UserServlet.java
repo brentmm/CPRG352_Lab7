@@ -34,6 +34,7 @@ public class UserServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         String emailIn = request.getParameter("email");
+        
         if(action != null){
         if(action.equals("delete")){
             
@@ -69,7 +70,49 @@ public class UserServlet extends HttpServlet {
         else{
             
         }
+        }if(action.equals("edit")){
+            User user;
+            try {
+            user = udb.get(emailIn);
+            request.setAttribute("emailEdit", user.getEmail());
+            request.setAttribute("firstnameEdit", user.getFirstname());
+            request.setAttribute("lastnameEdit", user.getLastname());
+            request.setAttribute("roleEdit", user.getRole());
+            request.setAttribute("activeEdit", user.getActive());
+             
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            //if the email containts a space (default)
+            if(emailIn.contains(" ")){
+            String emailArray[]  = emailIn.split(" ");
+            String emailMake = emailArray[0] + "+" + emailArray[1];
+            try {
+            user= udb.get(emailMake);
+            request.setAttribute("emailEdit", user.getEmail());
+            request.setAttribute("firstnameEdit", user.getFirstname());
+            request.setAttribute("lastnameEdit", user.getLastname());
+            request.setAttribute("roleEdit", user.getRole());
+            request.setAttribute("activeEdit", user.getActive());
+        try {
+            List<User> usersList = udb.getAll(); 
+            request.setAttribute("users", usersList);
+        } catch (Exception ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+            
+            
+            
+            
+        }
+        
+        
+        
         }
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);  //loads Shopping list page
         return;
@@ -118,11 +161,9 @@ public class UserServlet extends HttpServlet {
                     List<User> usersList = udb.getAll();
                     request.setAttribute("users", usersList);
                     break;
-//                case "update":
+//                case "edit":
 //                    ns.update(Integer.parseInt(noteId), title, contents, email);
 //                    break;
-//                case "delete":
-//                    ns.delete(Integer.parseInt(noteId));
             }
             request.setAttribute("message", action);
         } catch (Exception ex) {
