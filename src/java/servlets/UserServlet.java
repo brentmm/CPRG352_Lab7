@@ -133,7 +133,7 @@ public class UserServlet extends HttpServlet {
                 String active = request.getParameter("activeEdit");
                 String password = request.getParameter("passwordEdit");
                 
-                if(email.length() <= 20 && firstName != null && !firstName.equals("") && firstName.length() <=20 && lastName != null && !lastName.equals("") && lastName.length() <=20 && password != null && !password.equals("") && password.length() <=20){
+                if(email.length() <= 40 && firstName != null && !firstName.equals("") && firstName.length() <=20 && lastName != null && !lastName.equals("") && lastName.length() <=20 && password != null && !password.equals("") && password.length() <=20){
                 boolean activeEdit;
                 
                 if(active != null){
@@ -193,7 +193,7 @@ public class UserServlet extends HttpServlet {
         String activated = request.getParameter("active");
         
         
-        if(email.length() <= 20 && fName != null && !fName.equals("") && fName.length() <=20 && lName != null && !lName.equals("") && lName.length() <=20 && password != null && !password.equals("") && password.length() <=20){
+        if(email.length() <= 40 && fName != null && !fName.equals("") && fName.length() <=20 && lName != null && !lName.equals("") && lName.length() <=20 && password != null && !password.equals("") && password.length() <=20){
         boolean activation = false;
         if(activated != null){
         if(request.getParameter("active")==null){
