@@ -66,10 +66,7 @@ public class UserServlet extends HttpServlet {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             }
-        
-        else{
-            
-        }
+
         }if(action.equals("edit")){
             User user;
             try {
@@ -79,6 +76,7 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("lastnameEdit", user.getLastname());
             request.setAttribute("roleEdit", user.getRole());
             request.setAttribute("activeEdit", user.getActive());
+            request.setAttribute("passwordEdit", user.getPassword());
              
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,6 +93,7 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("lastnameEdit", user.getLastname());
             request.setAttribute("roleEdit", user.getRole());
             request.setAttribute("activeEdit", user.getActive());
+            request.setAttribute("passwordEdit", user.getPassword());
         try {
             List<User> usersList = udb.getAll(); 
             request.setAttribute("users", usersList);
@@ -122,12 +121,66 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
         UserDB udb = new UserDB();
         
+        if(request.getParameter("save")!=null){
+        
+            try {
+                String email = request.getParameter("emailEdit");
+                String firstName = request.getParameter("firstnameEdit");
+                String lastName = request.getParameter("lastnameEdit");
+                String role = request.getParameter("roleEdit");
+                String active = request.getParameter("activeEdit");
+                String password = request.getParameter("passwordEdit");
+                boolean activeEdit;
+                
+                if(active != null){
+                     activeEdit = true;
+                }else{
+                     activeEdit = false;
+                }
+                
+                User user;
+                int newRole = 0;
+                
+                switch (role){
+                case "System Admin":             
+                newRole = 1;
+                break;
+                case "Regular User":
+                newRole = 2;
+                break;
+                case "Company Admin":
+                newRole = 3;
+                break;    
+            }
+                user = new User (email, activeEdit, firstName, lastName, password, newRole);
+                
+                udb.update(user);
+                List<User> usersList = udb.getAll();
+                request.setAttribute("users", usersList);
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        
+        
+        
+        if(request.getParameter("Add")!= null){
         String action = request.getParameter("Add");
         String email = request.getParameter("email");
+        
+        
+        
+        
         String fName = request.getParameter("fName");
+        if(fName == null){
+            
+        }
+        
+        
+        
         String lName = request.getParameter("lName");
         String password = request.getParameter("password");
         String role = request.getParameter("roles");
@@ -161,9 +214,7 @@ public class UserServlet extends HttpServlet {
                     List<User> usersList = udb.getAll();
                     request.setAttribute("users", usersList);
                     break;
-//                case "edit":
-//                    ns.update(Integer.parseInt(noteId), title, contents, email);
-//                    break;
+                
             }
             request.setAttribute("message", action);
         } catch (Exception ex) {
@@ -171,7 +222,27 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("message", "error");
         }
 
-        
+        try {
+                udb.getAll();
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        if(request.getParameter("cancel") != null){
+                    request.setAttribute("email", null);
+                    request.setAttribute("firstnameEdit", null);
+                    request.setAttribute("lastnameEdit", null);
+                    
+                    List<User> usersList1;
+            try {
+                usersList1 = udb.getAll();
+                request.setAttribute("users", usersList1);
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                    
+    }
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);  //loads Shopping list page
         return;
     }
