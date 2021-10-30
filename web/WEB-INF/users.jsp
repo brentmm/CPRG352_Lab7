@@ -117,7 +117,7 @@
                         <input class="input"type="email" placeholder="Email" name="emailEdit" value="${emailEdit}" readonly=""><br>
                         <input class="input"type="text" placeholder="First Name" name="firstnameEdit" value="${firstnameEdit}"> <br>    
                         <input class="input"type="text"placeholder="Last Name" name="lastnameEdit" value="${lastnameEdit}"><br>
-                        
+                        <input class="input"type="password"placeholder="Password" name="passwordEdit" value="${passwordEdit}"><br>
                         <select class='dropdown' name="roleEdit" id="roles" value="${dropdownEdit}" name="dropdownEdit">
                             <option value="System Admin">System Admin</option>
                             <option value="Regular User">Regular User</option>

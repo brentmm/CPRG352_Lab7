@@ -132,6 +132,8 @@ public class UserServlet extends HttpServlet {
                 String role = request.getParameter("roleEdit");
                 String active = request.getParameter("activeEdit");
                 String password = request.getParameter("passwordEdit");
+                
+                if(email.length() <= 20 && firstName != null && !firstName.equals("") && firstName.length() <=20 && lastName != null && !lastName.equals("") && lastName.length() <=20 && password != null && !password.equals("") && password.length() <=20){
                 boolean activeEdit;
                 
                 if(active != null){
@@ -159,9 +161,19 @@ public class UserServlet extends HttpServlet {
                 udb.update(user);
                 List<User> usersList = udb.getAll();
                 request.setAttribute("users", usersList);
+                }else{
+                try {
+                List<User> usersList1;
+                usersList1 = udb.getAll();
+                request.setAttribute("users", usersList1);
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             
         }
         
@@ -175,16 +187,13 @@ public class UserServlet extends HttpServlet {
         
         
         String fName = request.getParameter("fName");
-        if(fName == null){
-            
-        }
-        
-        
-        
         String lName = request.getParameter("lName");
         String password = request.getParameter("password");
         String role = request.getParameter("roles");
         String activated = request.getParameter("active");
+        
+        
+        if(email.length() <= 20 && fName != null && !fName.equals("") && fName.length() <=20 && lName != null && !lName.equals("") && lName.length() <=20 && password != null && !password.equals("") && password.length() <=20){
         boolean activation = false;
         if(activated != null){
         if(request.getParameter("active")==null){
@@ -227,8 +236,17 @@ public class UserServlet extends HttpServlet {
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }else{
+            try {
+                List<User> usersList1;
+                usersList1 = udb.getAll();
+                request.setAttribute("users", usersList1);
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
-
+        }
         if(request.getParameter("cancel") != null){
                     request.setAttribute("email", null);
                     request.setAttribute("firstnameEdit", null);
