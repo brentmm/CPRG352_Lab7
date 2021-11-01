@@ -173,55 +173,63 @@ public class UserServlet extends HttpServlet {
         }
 
         if (request.getParameter("Add") != null) {
-            String action = request.getParameter("Add"); //retrieves values from add input boxes
-            String email = request.getParameter("email");
-            String fName = request.getParameter("fName");
-            String lName = request.getParameter("lName");
-            String password = request.getParameter("password");
-            String role = request.getParameter("roles");
-            String activated = request.getParameter("active");
-
-            if (email.length() <= 40 && fName != null && !fName.equals("") && fName.length() <= 20 && lName != null && !lName.equals("") && lName.length() <= 20 && password != null && !password.equals("") && password.length() <= 20) {
-                //if stmt checks to make sure boxes are not empty and that the name/email meets db constraints 
-                boolean activation = false;
-                if (activated != null) {
-                    if (request.getParameter("active") == null) {
-                        activation = false;
-                    } else {
-                        activation = true;
+            try {
+                String action = request.getParameter("Add"); //retrieves values from add input boxes
+                String email = request.getParameter("email");
+                String fName = request.getParameter("fName");
+                String lName = request.getParameter("lName");
+                String password = request.getParameter("password");
+                String role = request.getParameter("roles");
+                String activated = request.getParameter("active");
+                
+                if (email.length() <= 40 && fName != null && !fName.equals("") && fName.length() <= 20 && lName != null && !lName.equals("") && lName.length() <= 20 && password != null && !password.equals("") && password.length() <= 20) {
+                    //if stmt checks to make sure boxes are not empty and that the name/email meets db constraints
+                    boolean activation = false;
+                    if (activated != null) {
+                        if (request.getParameter("active") == null) {
+                            activation = false;
+                        } else {
+                            activation = true;
+                        }
                     }
-                }
-                int newRole = 0;
-                switch (role) {  //case stmt to set role number based off string value
-                    case "System Admin":
-                        newRole = 1;
-                        break;
-                    case "Regular User":
-                        newRole = 2;
-                        break;
-                    case "Company Admin":
-                        newRole = 3;
-                        break;
-                }
-                User user = new User(email, activation, fName, lName, password, newRole);
-
-                try {
-                    udb.insert(user); //inserts user into db table
-                    List<User> usersList = udb.getAll(); //reloads updated table from db
-                    request.setAttribute("users", usersList);
-                    request.setAttribute("errorMsg", "User Added!");
-
-                } catch (Exception ex) {
+                    int newRole = 0;
+                    switch (role) {  //case stmt to set role number based off string value
+                        case "System Admin":
+                            newRole = 1;
+                            break;
+                        case "Regular User":
+                            newRole = 2;
+                            break;
+                        case "Company Admin":
+                            newRole = 3;
+                            break;
+                    }
+                    User user = new User(email, activation, fName, lName, password, newRole);
+                    
                     try {
-                        List<User> usersList = udb.getAll(); //if there is an error that doesnt allow an insert table is reloaded
+                        udb.insert(user); //inserts user into db table
+                        List<User> usersList = udb.getAll(); //reloads updated table from db
                         request.setAttribute("users", usersList);
-                        request.setAttribute("errorMsg", "There was an error while adding a user.");
-                    } catch (Exception ex1) {
-                        Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex1);
+                        request.setAttribute("errorMsg", "User Added!");
+                        
+                    } catch (Exception ex) {
+                        try {
+                            List<User> usersList = udb.getAll(); //if there is an error that doesnt allow an insert table is reloaded
+                            request.setAttribute("users", usersList);
+                            request.setAttribute("errorMsg", "User Added!");
+                        } catch (Exception ex1) {
+                            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex1);
+                        }
+                        Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                        request.setAttribute("message", "error");
                     }
-                    Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-                    request.setAttribute("message", "error");
+                }else{
+                List<User> usersList = udb.getAll(); //if there is an error that doesnt allow an insert table is reloaded
+                request.setAttribute("users", usersList);
+                request.setAttribute("errorMsg", "There was an error while adding a user.");
                 }
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
