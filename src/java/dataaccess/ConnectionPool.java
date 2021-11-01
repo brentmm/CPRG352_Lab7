@@ -5,6 +5,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.sql.*;
 
+/**
+ * This class was adapted from the Module 7 Demo
+ * Credit to author and owner
+ * 
+ */
 public class ConnectionPool {
 
     private static ConnectionPool pool = null;

@@ -8,7 +8,12 @@ import java.util.List;
 import models.Role;
 import models.User;
 
-
+/**
+ * This class was adapted from the Module 7 Demo
+ * Credit to author and owner
+ * Edited by Dynamic Duo
+ * 
+ */
 public class UserDB {
 
     public List<User> getAll() throws Exception {
@@ -18,9 +23,9 @@ public class UserDB {
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         String sql = "SELECT * FROM user";
-        
+
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -31,7 +36,6 @@ public class UserDB {
                 String lastName = rs.getString(4);
                 String password = rs.getString(5);
                 role.setRole(rs.getInt(6));
-                //int role = rs.getInt(6);
                 User user = new User(email, active, firstName, lastName, password, role.getRole());
                 users.add(user);
             }
@@ -47,14 +51,13 @@ public class UserDB {
     public User get(String email) throws Exception {
         User user = null;
         Role role = new Role();
-        //individual connection
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
-        
+
         PreparedStatement ps = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM user WHERE email=?";
-        
+
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, email);
@@ -64,7 +67,6 @@ public class UserDB {
                 String firstName = rs.getString(3);
                 String lastName = rs.getString(4);
                 String password = rs.getString(5);
-                //int role = rs.getInt(6);
                 user = new User(email, active, firstName, lastName, password, role.getRole());
             }
         } finally {
@@ -72,7 +74,7 @@ public class UserDB {
             DBUtil.closePreparedStatement(ps);
             cp.freeConnection(con);
         }
-        
+
         return user;
     }
 
@@ -82,7 +84,6 @@ public class UserDB {
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         String sql = "INSERT INTO user (email, active, first_name, last_name, password, role) VALUES (?, ?, ?, ?, ?, ?)";
-        //role.setRole(user.getRole());
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, user.getEmail());
@@ -90,7 +91,7 @@ public class UserDB {
             ps.setString(3, user.getFirstname());
             ps.setString(4, user.getLastname());
             ps.setString(5, user.getPassword());
-            ps.setInt(6,user.getRole());                  
+            ps.setInt(6, user.getRole());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
@@ -103,7 +104,7 @@ public class UserDB {
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         String sql = "UPDATE user SET active=? , first_name=?, last_name=?, password=?, role=? WHERE email=?";
-        
+
         try {
             ps = con.prepareStatement(sql);
             ps.setBoolean(1, user.getActive());
@@ -124,7 +125,7 @@ public class UserDB {
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         String sql = "DELETE FROM user WHERE email=?";
-        
+
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, user.getEmail());

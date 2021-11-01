@@ -65,8 +65,8 @@ and open the template in the editor.
     cursor: pointer;
     padding: 2% 2% 2% 2%;
     font-size: 100%;
-box-shadow: 2px 2px 2px orange;
-text-shadow: white 2px 2px 2px;
+    box-shadow: 2px 2px 2px orange;
+    text-shadow: white 2px 2px 2px;
 }
 #error{
     color: red;
@@ -140,7 +140,7 @@ body{
 td{
     color: white;
     padding-bottom: 10px;
-    
+
 
 }
 th{

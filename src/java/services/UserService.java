@@ -4,6 +4,10 @@ import dataaccess.UserDB;
 import java.util.List;
 import models.User;
 
+/**
+ *
+ * @author Dynamic Duo
+ */
 public class UserService {
 
     public User get(String email) throws Exception {

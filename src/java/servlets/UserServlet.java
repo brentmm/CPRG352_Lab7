@@ -2,7 +2,6 @@ package servlets;
 
 import dataaccess.UserDB;
 import java.io.IOException;
-//import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,8 +39,8 @@ public class UserServlet extends HttpServlet {
             if (action.equals("delete")) {
 
                 try {
-                    udb.delete(emailIn);
-                    List<User> usersList = udb.getAll();
+                    udb.delete(emailIn);// if action = deleted users is removed from db by email
+                    List<User> usersList = udb.getAll(); //reloads table from db
                     request.setAttribute("users", usersList);
 
                 } catch (Exception ex) {
@@ -53,9 +52,9 @@ public class UserServlet extends HttpServlet {
                     String emailMake = emailArray[0] + "+" + emailArray[1];
                     try {
 
-                        udb.delete(emailMake);
+                        udb.delete(emailMake); //removes user from db
                         try {
-                            List<User> usersList = udb.getAll();
+                            List<User> usersList = udb.getAll(); //reloads updated table from db
                             request.setAttribute("users", usersList);
                         } catch (Exception ex) {
                             Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,8 +68,8 @@ public class UserServlet extends HttpServlet {
             if (action.equals("edit")) {
                 User user;
                 try {
-                    user = udb.get(emailIn);
-                    request.setAttribute("emailEdit", user.getEmail());
+                    user = udb.get(emailIn); //gets user object by email
+                    request.setAttribute("emailEdit", user.getEmail()); //sets all input boxes to email users info
                     request.setAttribute("firstnameEdit", user.getFirstname());
                     request.setAttribute("lastnameEdit", user.getLastname());
                     request.setAttribute("roleEdit", user.getRole());
@@ -84,17 +83,17 @@ public class UserServlet extends HttpServlet {
                 //if the email containts a space (default)
                 if (emailIn.contains(" ")) {
                     String emailArray[] = emailIn.split(" ");
-                    String emailMake = emailArray[0] + "+" + emailArray[1];
+                    String emailMake = emailArray[0] + "+" + emailArray[1]; //corrects format of email
                     try {
-                        user = udb.get(emailMake);
-                        request.setAttribute("emailEdit", user.getEmail());
+                        user = udb.get(emailMake); //gets user object by email
+                        request.setAttribute("emailEdit", user.getEmail()); //sets all input boxes to email users info
                         request.setAttribute("firstnameEdit", user.getFirstname());
                         request.setAttribute("lastnameEdit", user.getLastname());
                         request.setAttribute("roleEdit", user.getRole());
                         request.setAttribute("activeEdit", user.getActive());
                         request.setAttribute("passwordEdit", user.getPassword());
                         try {
-                            List<User> usersList = udb.getAll();
+                            List<User> usersList = udb.getAll(); //reloads updated table from db
                             request.setAttribute("users", usersList);
                         } catch (Exception ex) {
                             Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,7 +106,7 @@ public class UserServlet extends HttpServlet {
             }
 
         }
-        getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);  //loads Shopping list page
+        getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response); //loads page
         return;
 
     }
@@ -120,7 +119,7 @@ public class UserServlet extends HttpServlet {
         if (request.getParameter("save") != null) {
 
             try {
-                String email = request.getParameter("emailEdit");
+                String email = request.getParameter("emailEdit"); //retrieves values from input boxes
                 String firstName = request.getParameter("firstnameEdit");
                 String lastName = request.getParameter("lastnameEdit");
                 String role = request.getParameter("roleEdit");
@@ -128,6 +127,7 @@ public class UserServlet extends HttpServlet {
                 String password = request.getParameter("passwordEdit");
 
                 if (email.length() <= 40 && firstName != null && !firstName.equals("") && firstName.length() <= 20 && lastName != null && !lastName.equals("") && lastName.length() <= 20 && password != null && !password.equals("") && password.length() <= 20) {
+                    //if stmt checks to make sure boxes are not empty and that the name/email meets db constraints 
                     boolean activeEdit;
 
                     if (active != null) {
@@ -139,7 +139,7 @@ public class UserServlet extends HttpServlet {
                     User user;
                     int newRole = 0;
 
-                    switch (role) {
+                    switch (role) { //case stmt to set role number based off string value
                         case "System Admin":
                             newRole = 1;
                             break;
@@ -152,13 +152,14 @@ public class UserServlet extends HttpServlet {
                     }
                     user = new User(email, activeEdit, firstName, lastName, password, newRole);
 
-                    udb.update(user);
-                    List<User> usersList = udb.getAll();
+                    udb.update(user); //updates user in db
+                    List<User> usersList = udb.getAll(); //reloads updated table from db
                     request.setAttribute("users", usersList);
+                    request.setAttribute("errorMsgSave", "User Edited!");
                 } else {
                     request.setAttribute("errorMsgSave", "There was an error while saving a user.");
                     try {
-                        List<User> usersList1;
+                        List<User> usersList1; //if there is an error that doesnt allow an update table is reloaded
                         usersList1 = udb.getAll();
                         request.setAttribute("users", usersList1);
                     } catch (Exception ex) {
@@ -172,9 +173,8 @@ public class UserServlet extends HttpServlet {
         }
 
         if (request.getParameter("Add") != null) {
-            String action = request.getParameter("Add");
+            String action = request.getParameter("Add"); //retrieves values from add input boxes
             String email = request.getParameter("email");
-
             String fName = request.getParameter("fName");
             String lName = request.getParameter("lName");
             String password = request.getParameter("password");
@@ -182,6 +182,7 @@ public class UserServlet extends HttpServlet {
             String activated = request.getParameter("active");
 
             if (email.length() <= 40 && fName != null && !fName.equals("") && fName.length() <= 20 && lName != null && !lName.equals("") && lName.length() <= 20 && password != null && !password.equals("") && password.length() <= 20) {
+                //if stmt checks to make sure boxes are not empty and that the name/email meets db constraints 
                 boolean activation = false;
                 if (activated != null) {
                     if (request.getParameter("active") == null) {
@@ -191,7 +192,7 @@ public class UserServlet extends HttpServlet {
                     }
                 }
                 int newRole = 0;
-                switch (role) {
+                switch (role) {  //case stmt to set role number based off string value
                     case "System Admin":
                         newRole = 1;
                         break;
@@ -205,62 +206,43 @@ public class UserServlet extends HttpServlet {
                 User user = new User(email, activation, fName, lName, password, newRole);
 
                 try {
-                    switch (action) {
-                        case "Add":
-                            udb.insert(user);
-                            List<User> usersList = udb.getAll();
-                            request.setAttribute("users", usersList);
-                            break;
+                    udb.insert(user); //inserts user into db table
+                    List<User> usersList = udb.getAll(); //reloads updated table from db
+                    request.setAttribute("users", usersList);
+                    request.setAttribute("errorMsg", "User Added!");
 
-                    }
-                    request.setAttribute("message", action);
                 } catch (Exception ex) {
                     try {
-                       List<User> usersList = udb.getAll();
-                            request.setAttribute("users", usersList);
-                             request.setAttribute("errorMsg", "There was an error while adding a user.");
+                        List<User> usersList = udb.getAll(); //if there is an error that doesnt allow an insert table is reloaded
+                        request.setAttribute("users", usersList);
+                        request.setAttribute("errorMsg", "There was an error while adding a user.");
                     } catch (Exception ex1) {
                         Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex1);
                     }
                     Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
                     request.setAttribute("message", "error");
                 }
-
-                try {
-                   List<User> usersList = udb.getAll();
-                            request.setAttribute("users", usersList);
-                             request.setAttribute("errorMsg", "There was an error while adding a user.");
-                } catch (Exception ex) {
-                    Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                request.setAttribute("errorMsg", "There was an error while adding a user.");
-                try {
-                    List<User> usersList1;
-                    usersList1 = udb.getAll();
-                    request.setAttribute("users", usersList1);
-                } catch (Exception ex) {
-                    Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
             }
         }
-        if (request.getParameter("cancel") != null) {
-            request.setAttribute("email", null);
+
+        if (request.getParameter("cancel") != null) { //when cancel is pressed
+            request.setAttribute("email", null); //sets input boxes in edit field to be empty
             request.setAttribute("firstnameEdit", null);
             request.setAttribute("lastnameEdit", null);
-            
 
             List<User> usersList1;
             try {
-                usersList1 = udb.getAll();
+                usersList1 = udb.getAll(); //gets table from db
                 request.setAttribute("users", usersList1);
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
-        getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);  //loads Shopping list page
+
+        getServletContext()
+        .getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);  //loads page
+
         return;
     }
 
