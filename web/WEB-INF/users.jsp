@@ -36,37 +36,40 @@
                         <a class="checkbox" style="">Active<input style="" class="checkbox" type="checkbox" name="active" placeholder="" value=""></a> <br>
                         <input type="submit" name="Add" value="Add" id="saveBtn" style=""><br>
                     </form>
+                    <h3 id="error" style="color: red; text-shadow: black 2px 2px 2px;">
+                        ${errorMsg}
+                    </h3>
                 </div>
             </div>
             <div class="column">
                 <div class="card">
                     <h1 class="headers" style="">Manage Users</h1>
 
-                    <table class="manage" style="">
+                    <table class="manage" style="box-shadow: 2px 2px 6px orange;">
                         <tr style="">
-                            <th style="">Role</th>
-                            <th style="">Email</th>
-                            <th style="">First</th>
-                            <th style="">Last</th>  
-                            <th style="">Action</th> 
+                            <td style="">Role</th>
+                            <td style="">Email</th>
+                            <td style="">First</th>
+                            <td style="">Last</th>  
+                            <td style="">Action</th> 
                         </tr>
 
                         <c:forEach items="${users}" var="user">
                             <c:if test="${user.getActive()}">
                                 <tr style="color: white" >
-                                    <td class="manage" style="">
+                                    <td class="manage" style="width: 20%;">
                                         ${user.getRole()}
                                     </td>
-                                    <td class="manage" style="">
+                                    <td class="manage" style="width: 20%;">
                                         ${user.getEmail()}
                                     </td>
-                                    <td class="manage" style="">
+                                    <td class="manage" style="width: 20%;">
                                         ${user.getFirstname()}
                                     </td>
-                                    <td class="manage" style="">
+                                    <td class="manage" style="width: 20%;">
                                         ${user.getLastname()}
                                     </td>
-                                    <td class="manage" style="">
+                                    <td class="manage" style="width: 20%;">
                                         <a href="edit?action=edit&email=${user.getEmail()}" style="" id="edit"><image src="edit_icon_better.png" width="20px"> </a> 
                                         <a href="delete?action=delete&email=${user.getEmail()}"><image src="delete icon.png" width="20px"> </a> 
                                     </td>
@@ -79,32 +82,32 @@
                     <h1 class="headers" style="">
                         Inactive Users
                     </h1>
-                    <table class="manage" style="">
+                    <table class="manage" style="box-shadow: 2px 2px 6px orange;">
                         <tr style="">
-                            <th style="">Role</th>
-                            <th style="">Email</th>
-                            <th style="">First</th>
-                            <th style="">Last</th>  
-                            <th style="">Action</th> 
+                            <td style="">Role</th>
+                            <td style="">Email</th>
+                            <td style="">First</th>
+                            <td style="">Last</th>  
+                            <td style="">Action</th> 
                         </tr>
 
                         <c:forEach items="${users}" var="user">
                             <c:if test="${!user.getActive()}">
                                 <tr style="color: white" >
-                                    <td class="manage" style="">
+                                    <td class="manage" style="width: 20%;">
                                         ${user.getRole()}
                                     </td>
-                                    <td class="manage" style="">
+                                    <td class="manage" style="width: 20%;">
                                         ${user.getEmail()}
                                     </td>
-                                    <td class="manage" style="">
+                                    <td class="manage" style="width: 20%;">
                                         ${user.getFirstname()}
                                     </td>
-                                    <td class="manage" style="">
+                                    <td class="manage" style="width: 20%;">
                                         ${user.getLastname()}
                                     </td>
-                                    <td class="manage" style="">
-                                        <a href="edit?action=edit&email=${user.getEmail()}" style=""><image src="edit_icon_better.png" width="20px"> </a> 
+                                    <td class="manage" style="width: 20%;">
+                                        <a href="edit?action=edit&email=${user.getEmail()}" style="" id="edit"><image src="edit_icon_better.png" width="20px"> </a> 
                                         <a href="delete?action=delete&email=${user.getEmail()}"><image src="delete icon.png" width="20px"> </a> 
                                     </td>
                                 </tr>

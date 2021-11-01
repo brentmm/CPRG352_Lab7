@@ -214,16 +214,26 @@ public class UserServlet extends HttpServlet {
                     }
                     request.setAttribute("message", action);
                 } catch (Exception ex) {
+                    try {
+                       List<User> usersList = udb.getAll();
+                            request.setAttribute("users", usersList);
+                             request.setAttribute("errorMsg", "There was an error while adding a user.");
+                    } catch (Exception ex1) {
+                        Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex1);
+                    }
                     Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
                     request.setAttribute("message", "error");
                 }
 
                 try {
-                    udb.getAll();
+                   List<User> usersList = udb.getAll();
+                            request.setAttribute("users", usersList);
+                             request.setAttribute("errorMsg", "There was an error while adding a user.");
                 } catch (Exception ex) {
                     Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
+                request.setAttribute("errorMsg", "There was an error while adding a user.");
                 try {
                     List<User> usersList1;
                     usersList1 = udb.getAll();
