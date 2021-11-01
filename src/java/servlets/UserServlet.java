@@ -156,6 +156,7 @@ public class UserServlet extends HttpServlet {
                     List<User> usersList = udb.getAll();
                     request.setAttribute("users", usersList);
                 } else {
+                    request.setAttribute("errorMsgSave", "There was an error while saving a user.");
                     try {
                         List<User> usersList1;
                         usersList1 = udb.getAll();
@@ -248,6 +249,7 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("email", null);
             request.setAttribute("firstnameEdit", null);
             request.setAttribute("lastnameEdit", null);
+            
 
             List<User> usersList1;
             try {

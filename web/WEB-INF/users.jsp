@@ -135,6 +135,10 @@
                         <input type="submit"name="save" value="Save" id="saveBtn" style="padding: 2% 2% 2% 2%;"><br>
                         <input type="submit"name="cancel" value="Cancel" id="cancelBtn" style="padding: 2% 2% 2% 2%;"><br>
                     </form>
+                    <h3 style="color: red; text-shadow: black 2px 2px 2px;">
+                        ${errorMsgSave}
+                    </h3>
+                            
                 </div>
             </div>
         </div>
