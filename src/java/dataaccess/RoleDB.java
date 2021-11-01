@@ -8,7 +8,6 @@ import java.util.List;
 import models.Role;
 import models.User;
 
-
 public class RoleDB {
 
 //   public List<Role> getAll(int role) throws Exception {
@@ -48,7 +47,6 @@ public class RoleDB {
 //
 //        return roles;
 //    }
-
 }
 
 

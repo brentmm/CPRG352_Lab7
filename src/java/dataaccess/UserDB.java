@@ -90,10 +90,7 @@ public class UserDB {
             ps.setString(3, user.getFirstname());
             ps.setString(4, user.getLastname());
             ps.setString(5, user.getPassword());
-            ps.setInt(6,user.getRole());
-            
-            
-            
+            ps.setInt(6,user.getRole());                  
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
@@ -122,7 +119,7 @@ public class UserDB {
         }
     }
 
-    public void delete(String email) throws Exception {
+    public void delete(User user) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
@@ -130,7 +127,7 @@ public class UserDB {
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, email);
+            ps.setString(1, user.getEmail());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);

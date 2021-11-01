@@ -49,25 +49,25 @@ and open the template in the editor.
 
 }
 #saveBtn{
-  width: 100%;
-  color: white;
-  background-color: blue;
-  padding: 2% 2% 2% 2%;
-  margin-bottom: 2%;
-  font-size: 100%;
+    width: 100%;
+    color: white;
+    background-color: blue;
+    padding: 2% 2% 2% 2%;
+    margin-bottom: 2%;
+    font-size: 100%;
 }
 #saveBtn:hover{
-  width: 100%;
-  color: black;
-  background-color: green;
-  cursor: pointer;
-  padding: 2% 2% 2% 2%;
-font-size: 100%;
+    width: 100%;
+    color: black;
+    background-color: green;
+    cursor: pointer;
+    padding: 2% 2% 2% 2%;
+    font-size: 100%;
 
 }
 #edit{
-padding-right: 10px;
-padding-left: 2px;
+    padding-right: 10px;
+    padding-left: 2px;
 }
 
 #cancelBtn{
@@ -105,20 +105,20 @@ padding-left: 2px;
 
 }
 .headers{
-     align-content: center; text-align: center; color: orange;  
-     background-color: rgba(255,255,255,0.25);
-     
-     box-shadow: 2px 2px 7px black;
+    align-content: center; text-align: center; color: orange;  
+    background-color: rgba(255,255,255,0.25);
+
+    box-shadow: 2px 2px 7px black;
 }
 body{
-background-image: url('halloween.png'); background-size: 100%;
-font-family:sans-serif;
+    background-image: url('halloween.png'); background-size: 100%;
+    font-family:sans-serif;
 }
 .manage{ 
     background-color: rgb(50,50,50); 
-   width: 100%;
-   display:compact;
-    
+    width: 100%;
+    display:compact;
+
 }
 .checkbox{
     color: white; background-color: rgb(50,50,50);
@@ -128,7 +128,7 @@ font-family:sans-serif;
 }
 td{
     color: white;
-        padding-bottom: 10px;
+    padding-bottom: 10px;
 
 }
 th{

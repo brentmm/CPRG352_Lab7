@@ -3,6 +3,7 @@ package dataaccess;
 import java.sql.*;
 
 public class DBUtil {
+
     public static void closePreparedStatement(Statement ps) {
         try {
             if (ps != null) {

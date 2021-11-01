@@ -6,6 +6,7 @@ import javax.naming.NamingException;
 import java.sql.*;
 
 public class ConnectionPool {
+
     private static ConnectionPool pool = null;
     private static DataSource dataSource = null;
 

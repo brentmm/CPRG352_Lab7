@@ -1,10 +1,11 @@
 package models;
 
 /**
- * 
+ *
  * @author Dynamic Duo
  */
 public class Role {
+
     private int role;
 
     public Role() {
@@ -17,7 +18,5 @@ public class Role {
     public void setRole(int role) {
         this.role = role;
     }
-    
-    
-}
 
+}

@@ -5,6 +5,7 @@ package models;
  * @author Dynamic Duo
  */
 public class User {
+
     private String email;
     private Boolean active;
     private String firstname;
@@ -23,9 +24,6 @@ public class User {
         this.password = password;
         this.role = role;
     }
-    
-    
-    
 
     public String getEmail() {
         return email;
@@ -74,7 +72,5 @@ public class User {
     public void setRole(int role) {
         this.role = role;
     }
-    
-    
-    
+
 }
