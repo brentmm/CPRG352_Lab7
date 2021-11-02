@@ -1,6 +1,6 @@
 /**
  * Retrieved from assignment document
- * Credit to Author
+ * Credit to Author/Owner
  * 
  */
 DROP SCHEMA IF EXISTS `userdb`;

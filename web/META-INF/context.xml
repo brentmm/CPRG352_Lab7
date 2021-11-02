@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Adapted from lab7 demo. Credit to owner-->
+
 <Context path="/lab7_userDB">
     <Resource
         name="jdbc/userdb"
